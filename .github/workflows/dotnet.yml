@@ -1,0 +1,27 @@
+name: .NET Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x' # Ensure this matches your project's .NET version
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      # Add a test step if you have tests, otherwise, you can remove this.
+      # For example: run: dotnet test --no-build --verbosity normal
+      # If you don't have tests yet, you might want to create some!
+      run: echo "No tests configured for this project yet."
